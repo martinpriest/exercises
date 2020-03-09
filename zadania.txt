@@ -1,0 +1,62 @@
+I
+Zadanie obiektowe (PHP):
+Używając interfejsów oraz klas abstrakcyjnych, przygotować obiektowo model samochodu, 
+który składałby się z 3 dowolnych podzespołów (np. silnik, deska rozdzielcza, komputer pokładowy). 
+Przy implementowaniu, należy wziąć pod uwagę czytelność oraz standardy kodowania.
+
+II
+Zadanie AJAX:
+Napisz prostą stronkę HTML, która wyświetli użytkownikowi formularz z pytaniem o jego imię i nazwisko:
+- Po wpisaniu imienia i wysłaniu formularza, strona za pomocą technologii AJAX 
+  wyśle do serwera podane imię, a następnie odbierze i wyświetli komunikat zwrócony przez serwer. 
+- Serwer PHP powinien odebrać i zapisać do pliku names.csv to imię i nazwisko, 
+  a następnie odesłać komunikat: Witaj + imię + nazwisko.
+
+III
+Zadanie MySQL
+Dana jest tabela user_log. Napisz jedno zapytanie SQL, które zaznaczy notify_admin na 1 ostatni wpis dla każdego użytkownika z action_type = abuse.
++----+---------+-------------+--------------+---------------------+
+| id | user_id | action_type | notify_admin | saved               |
++----+---------+-------------+--------------+---------------------+
+|  1 |       1 | login       |            0 | 2015-11-02 12:13:14 |
+|  2 |       1 | logout      |            0 | 2015-11-02 13:12:11 |
+|  3 |       1 | abuse       |            0 | 2016-01-03 14:10:02 |
+|  4 |       2 | abuse       |            0 | 2016-01-04 17:47:03 |
+|  5 |       2 | login       |            0 | 2016-01-04 18:11:55 |
+|  6 |       1 | abuse       |            0 | 2016-01-04 18:23:57 |
+|  7 |       1 | abuse       |            0 | 2016-01-04 18:24:23 |
+|  8 |       2 | logout      |            0 | 2016-01-04 18:25:24 |
+|  9 |       1 | abuse       |            0 | 2016-01-04 18:25:32 |
+| 10 |       1 | login       |            0 | 2016-01-05 21:02:59 |
+| 11 |       3 | login       |            0 | 2016-01-05 21:28:43 |
+| 12 |       3 | logout      |            0 | 2016-01-05 21:52:01 |
+| 13 |       2 | abuse       |            0 | 2016-01-05 22:00:35 |
+| 14 |       1 | logout      |            0 | 2016-01-05 22:12:09 |
++----+---------+-------------+--------------+---------------------+
+
+CREATE TABLE IF NOT EXISTS `user_log` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `action_type` enum('login','logout','abuse') CHARACTER SET latin1 NOT NULL,
+  `notify_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `saved` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15;
+INSERT INTO `user_log` (`id`, `user_id`, `action_type`, `notify_admin`, `saved`) VALUES
+(1, 1, 'login', 0, '2015-11-02 12:13:14'),
+(2, 1, 'logout', 0, '2015-11-02 13:12:11'),
+(3, 1, 'abuse', 0, '2016-01-03 14:10:02'),
+(4, 2, 'abuse', 0, '2016-01-04 17:47:03'),
+(5, 2, 'login', 0, '2016-01-04 18:11:55'),
+(6, 1, 'abuse', 0, '2016-01-04 18:23:57'),
+(7, 1, 'abuse', 0, '2016-01-04 18:24:23'),
+(8, 2, 'logout', 0, '2016-01-04 18:25:24'),
+(9, 1, 'abuse', 0, '2016-01-04 18:25:32'),
+(10, 1, 'login', 0, '2016-01-05 21:02:59'),
+(11, 3, 'login', 0, '2016-01-05 21:28:43'),
+(12, 3, 'logout', 0, '2016-01-05 21:52:01'),
+(13, 2, 'abuse', 0, '2016-01-05 22:00:35'),
+(14, 1, 'logout', 0, '2016-01-05 22:12:09');
+
+
+(Podpowiedź: zapytanie powinno zaznaczyć notify_admin = 1 dla wierszy o id = {9,13})
